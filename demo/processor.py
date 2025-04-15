@@ -595,9 +595,10 @@ class IDPhotoProcessor:
         elif custom_kb:
             output_paths["standard"]["path"] += f"_{custom_kb}kb.{format}"
             output_paths["hd"]["path"] += f".{format}"
-            if not (key == "layout" and result_image_layout is None):
-                output_paths[key]["path"] += f".{format}"
-            
+            # Correctly handle the layout path if it exists
+            if result_image_layout is not None:
+                output_paths["layout"]["path"] += f".{format}"
+
             # 只调整标准图像大小
             resize_image_to_kb(
                 result_image_standard,
